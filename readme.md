@@ -10,7 +10,7 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 - `username`: String (único)
 - `password`: String (encriptada)
 - `email`: String
-- `role`: Enum (USER/ADMIN)
+- `role`: String (USER/ADMIN)
 - `address`: Object
 
 
@@ -20,7 +20,7 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 - `description`: String
 - `state`: Boolean
 - `userId`: String (referencia al Usuario)
-- `completed`: DateTime
+- `completed`: LocalDate
 
 ## Endpoints
 
