@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import com.example.API_REST2.DTO.UserDTO
 import com.example.API_REST2.DTO.UserRegisterDTO
 import com.example.API_REST2.exception.BadRequestException
+import com.example.API_REST2.exception.ConflictException
 import com.example.API_REST2.exception.NotFoundException
 import com.example.API_REST2.exception.UnauthorizedException
 import com.example.API_REST2.model.User
@@ -56,7 +57,7 @@ class UserService : UserDetailsService {
         }
 
         if(userRepository.findByUsername(usuarioInsertadoDTO.username).isPresent){
-            throw Exception("Usuario ${usuarioInsertadoDTO.username} ya está registrado")
+            throw ConflictException("Usuario ${usuarioInsertadoDTO.username} ya está registrado")
         }
 
         val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()

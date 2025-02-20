@@ -112,8 +112,6 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
     - Username ya existe
     - Email ya registrado
 
-- 500 Internal Server Error
-    - Errores inesperados del servidor
 
 ## Restricciones de Seguridad
 

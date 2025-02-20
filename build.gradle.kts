@@ -4,6 +4,8 @@ plugins {
 	war
 	id("org.springframework.boot") version "3.4.2"
 	id("io.spring.dependency-management") version "1.1.7"
+
+
 }
 
 group = "com.example"
@@ -17,7 +19,11 @@ java {
 
 repositories {
 	mavenCentral()
+
+
 }
+
+
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
@@ -33,6 +39,10 @@ dependencies {
 	implementation("org.mongodb:mongodb-driver-kotlin-sync:5.3.0")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+
+
+
+
 }
 
 kotlin {
