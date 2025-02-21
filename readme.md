@@ -129,3 +129,36 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
     - Validación de formatos de email y contraseña
     - Límites de longitud en campos de texto
 
+
+## Comprobaciones
+
+### Creación de Usuario
+
+![Crear-user](Comprobaciones%2FCrear-user.png)
+![Crear-user-bbdd](Comprobaciones%2FCrear-user-bbdd.png)
+
+
+### Creación de Admin
+
+![Crear-admin](Comprobaciones%2FCrear-admin.png)
+![Crear-admin-bbdd](Comprobaciones%2FCrear-admin-bbdd.png)
+
+
+### Login de Usuario
+
+![Login-user](Comprobaciones%2FLogin-user.png)
+
+
+### Crear un Usuario repetido
+
+![Crear-user-repe](Comprobaciones%2FCrear-user-repe.png)
+
+
+### No coinciden contraseñas al repetirla
+
+![Crear-admin-incorrecto.png](Comprobaciones%2FCrear-admin-incorrecto.png)
+
+
+### Credenciales Incorrectas
+
+![Login-user-incorrecto.png](Comprobaciones%2FLogin-user-incorrecto.png)
