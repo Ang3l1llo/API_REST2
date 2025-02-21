@@ -5,6 +5,5 @@ data class Address(
     val number: String,
     val municipio: String,
     val provincia: String,
-    val cp: String,
-    val city: String
+    val cp: String
 )

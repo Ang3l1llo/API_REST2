@@ -11,5 +11,4 @@ data class UserRegisterDTO(
     val municipio: String,
     val provincia: String,
     val cp: String,
-    val city: String
 )

@@ -20,8 +20,8 @@ object DTOMapper {
                 number = usuarioInsertDTO.num,
                 municipio = usuarioInsertDTO.municipio,
                 provincia = usuarioInsertDTO.provincia,
-                cp = usuarioInsertDTO.cp,
-                city = usuarioInsertDTO.city
+                cp = usuarioInsertDTO.cp
+
             ),
         )
     }
@@ -39,7 +39,6 @@ object DTOMapper {
             municipio = user.address.municipio,
             provincia = user.address.provincia,
             cp = user.address.cp,
-            city = user.address.city,
         )
     }
 

@@ -130,7 +130,7 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
     - Límites de longitud en campos de texto
 
 
-## Comprobaciones
+## PRUEBAS GESTIÓN USUARIOS
 
 ### Creación de Usuario
 
@@ -162,3 +162,22 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 ### Credenciales Incorrectas
 
 ![Login-user-incorrecto.png](Comprobaciones%2FLogin-user-incorrecto.png)
+
+
+
+### GUI Registro
+
+![GUI-Registro-Valido.png](Comprobaciones%2FGUI-Registro-Valido.png)
+
+![GUI-Registro-noValido.png](Comprobaciones%2FGUI-Registro-noValido.png)
+
+![Crear-user-bbdd-gui.png](Comprobaciones%2FCrear-user-bbdd-gui.png)
+
+
+### GUI Login
+
+![GUI-Login.png](Comprobaciones%2FGUI-Login.png)
+
+![GUI-Login-Fail.png](Comprobaciones%2FGUI-Login-Fail.png)
+
+

@@ -34,6 +34,10 @@ dependencies {
     implementation("io.ktor:ktor-client-serialization:2.3.5")
 
 
+
+
+
+
 }
 
 compose.desktop {
