@@ -4,6 +4,7 @@ import com.example.API_REST2.DTO.TaskDTO
 import com.example.API_REST2.DTO.TaskInsertDTO
 import com.example.API_REST2.exception.BadRequestException
 import com.example.API_REST2.exception.ConflictException
+import com.example.API_REST2.exception.NotFoundException
 import com.example.API_REST2.model.Task
 import com.example.API_REST2.repository.TaskRepository
 import com.example.API_REST2.util.DTOMapper
@@ -16,8 +17,6 @@ class TaskService {
 
     @Autowired
     private lateinit var taskRepository: TaskRepository
-    @Autowired
-    private lateinit var userService: UserService
 
     fun createTask(taskInsertDTO: TaskInsertDTO): TaskDTO {
 
@@ -46,19 +45,45 @@ class TaskService {
         return DTOMapper.entityToTaskDTO(task)
     }
 
-    fun loadAllTasks() {
+    fun loadAllTasks(): List<TaskDTO> {
+
+        return taskRepository.findAll().map { DTOMapper.entityToTaskDTO(it) }
 
     }
 
-    fun loadTaskByTitle() {
+    fun loadTaskById(id: String): TaskDTO {
+
+        val task = taskRepository.findById(id).orElseThrow{NotFoundException("Tarea con ID ${id} no encontrada")}
+
+        return DTOMapper.entityToTaskDTO(task)
 
     }
 
-    fun updateTask() {
+    fun updateTask(id: String, taskDTO: TaskInsertDTO): TaskDTO {
+
+        val existingTask = taskRepository.findById(id).orElseThrow{NotFoundException("Tarea con ID ${id} no encontrada")}
+
+        val updatedTask = existingTask.copy(
+            title = taskDTO.title,
+            description = taskDTO.description,
+            state = taskDTO.state,
+            userId = taskDTO.userId,
+            completed = taskDTO.completed
+        )
+
+        taskRepository.save(updatedTask)
+
+        return DTOMapper.entityToTaskDTO(updatedTask)
+
 
     }
 
-    fun deleteTask() {
+    fun deleteTask(id: String) {
+
+        if (!taskRepository.existsById(id)) {
+            throw NotFoundException("Tarea con ID ${id} no existente")
+        }
+        taskRepository.deleteById(id)
 
     }
 }

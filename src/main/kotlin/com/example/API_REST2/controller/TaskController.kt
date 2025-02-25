@@ -33,21 +33,34 @@ class TaskController {
     @GetMapping("/{id}")
     fun read(@PathVariable id: String, httpRequest: HttpServletRequest): ResponseEntity<TaskDTO> {
 
+        val task = taskService.loadTaskById(id)
+
+        return ResponseEntity.ok(task)
 
     }
 
     @GetMapping("/getAll")
     fun readAll(httpRequest: HttpServletRequest): ResponseEntity<List<TaskDTO>>{
 
+        val tasks = taskService.loadAllTasks()
+
+        return ResponseEntity.ok(tasks)
+
     }
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: String, @RequestBody taskDTO: TaskInsertDTO, httpRequest: HttpServletRequest): ResponseEntity<TaskDTO> {
 
+        val updateTask = taskService.updateTask(id, taskDTO)
+
+        return ResponseEntity.ok(updateTask)
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long, httpRequest: HttpServletRequest): ResponseEntity<Void> {
+    fun delete(@PathVariable id: String, httpRequest: HttpServletRequest): ResponseEntity<Void> {
 
+        taskService.deleteTask(id)
+
+        return ResponseEntity.noContent().build()
     }
 }
