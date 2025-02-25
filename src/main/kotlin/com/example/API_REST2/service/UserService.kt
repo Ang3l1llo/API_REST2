@@ -70,6 +70,7 @@ class UserService : UserDetailsService {
             throw BadRequestException("Las contraseñas no coinciden")
         }
 
+
         val usuario = DTOMapper.usuarioRegisteredDTOToEntity(usuarioInsertadoDTO, passwordEncoder)
         val datosProvincias = apiService.obtenerDatosDesdeApi()
 

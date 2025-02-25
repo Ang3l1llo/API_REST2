@@ -9,7 +9,6 @@ import java.time.LocalDate
 data class Task (
     @BsonId
     val _id : String?,
-    @Indexed(unique = true)
     val title: String,
     val description: String,
     val state: Boolean,

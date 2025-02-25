@@ -1,8 +1,11 @@
 package com.example.API_REST2.util
 
+import com.example.API_REST2.DTO.TaskDTO
+import com.example.API_REST2.DTO.TaskInsertDTO
 import com.example.API_REST2.DTO.UserDTO
 import com.example.API_REST2.DTO.UserRegisterDTO
 import com.example.API_REST2.model.Address
+import com.example.API_REST2.model.Task
 import com.example.API_REST2.model.User
 import org.springframework.security.crypto.password.PasswordEncoder
 
@@ -27,7 +30,6 @@ object DTOMapper {
     }
 
     fun entityToUsuarioRegisteredDTO(user: User) : UserRegisterDTO {
-
         return UserRegisterDTO(
             username = user.username,
             email = user.email,
@@ -47,6 +49,34 @@ object DTOMapper {
             username = usuario.username,
             email = usuario.email,
             rol = usuario.rol
+        )
+    }
+
+    fun taskInsertDTOToEntity(taskInsertDTO: TaskInsertDTO): Task {
+        return Task(
+            _id = null,  // MongoDB generará automáticamente el ID
+            title = taskInsertDTO.title,
+            description = taskInsertDTO.description,
+            state = taskInsertDTO.state,
+            userId = taskInsertDTO.userId,
+            completed = taskInsertDTO.completed
+        )
+    }
+
+    fun entityToTaskDTO(task: Task): TaskDTO {
+        return TaskDTO(
+            title = task.title,
+            description = task.description
+        )
+    }
+
+    fun entityToTaskInsertDTO(task: Task): TaskInsertDTO {
+        return TaskInsertDTO(
+            title = task.title,
+            description = task.description,
+            state = task.state,
+            userId = task.userId,
+            completed = task.completed
         )
     }
 }

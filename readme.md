@@ -27,13 +27,13 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 ### Autenticación
 1. **Registro de Usuario**
     - Método: POST
-    - Ruta: `/api/auth/register`
+    - Ruta: `/users/register`
     - Descripción: Permite registrar un nuevo usuario en el sistema
     - Acceso: Público
 
 2. **Login**
     - Método: POST
-    - Ruta: `/api/auth/login`
+    - Ruta: `/users/login`
     - Descripción: Autenticación de usuario y generación de token JWT
     - Acceso: Público
 
@@ -41,31 +41,31 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 
 1. **Crear Tarea**
     - Método: POST
-    - Ruta: `/api/tasks`
+    - Ruta: `/tasks/create`
     - Descripción: Crear una nueva tarea
     - Acceso: USER (solo para sí mismo), ADMIN (para cualquier usuario)
 
 2. **Obtener Tareas**
     - Método: GET
-    - Ruta: `/api/tasks`
+    - Ruta: `/tasks/getAll`
     - Descripción: Obtener lista de tareas
     - Acceso: USER (solo sus tareas), ADMIN (todas las tareas)
 
 3. **Obtener Tarea por ID**
     - Método: GET
-    - Ruta: `/api/tasks/{id}`
+    - Ruta: `/tasks/{id}`
     - Descripción: Obtener detalles de una tarea específica
     - Acceso: USER (solo sus tareas), ADMIN (cualquier tarea)
 
-4. **Marcar Tarea como Completada**
+4. **Actualizar Tarea**
     - Método: PATCH
-    - Ruta: `/api/tasks/{id}/complete`
-    - Descripción: Actualizar el estado de una tarea a completada
+    - Ruta: `/tasks/{id}`
+    - Descripción: Actualizar el estado de una tarea 
     - Acceso: USER (solo sus tareas), ADMIN (cualquier tarea)
 
 5. **Eliminar Tarea**
     - Método: DELETE
-    - Ruta: `/api/tasks/{id}`
+    - Ruta: `/tasks/{id}`
     - Descripción: Eliminar una tarea
     - Acceso: USER (solo sus tareas), ADMIN (cualquier tarea)
 

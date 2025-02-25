@@ -37,7 +37,7 @@ class SecurityConfig {
             .csrf { csrf -> csrf.disable() } // Cross-Site Forgery
             .authorizeHttpRequests { auth -> auth
                 .anyRequest().permitAll()
-            } // Los recursos protegidos y publicos
+            }
             .oauth2ResourceServer { oauth2 -> oauth2.jwt(Customizer.withDefaults()) }
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .httpBasic(Customizer.withDefaults())
