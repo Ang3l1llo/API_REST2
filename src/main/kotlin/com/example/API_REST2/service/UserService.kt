@@ -14,11 +14,7 @@ import com.example.API_REST2.repository.UserRepository
 import com.example.API_REST2.util.DTOMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.oauth2.jwt.JwtEncoder
 import org.springframework.stereotype.Service
-import java.util.*
-
-
 
 
 @Service
@@ -42,7 +38,7 @@ class UserService : UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
             .username(user.username)
             .password(user.password)
-            .roles(user.rol)
+            .roles(user.role)
             .build()
     }
 

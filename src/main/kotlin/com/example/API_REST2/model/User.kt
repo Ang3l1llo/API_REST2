@@ -13,7 +13,7 @@ data class User(
     val password: String,
     @Indexed(unique = true)
     val email: String,
-    val rol: String = "USER",
+    val role: String = "USER",
     val address: Address
 
 ) {

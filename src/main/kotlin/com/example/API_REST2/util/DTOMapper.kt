@@ -17,7 +17,7 @@ object DTOMapper {
             username = usuarioInsertDTO.username,
             password = passwordEncoder.encode(usuarioInsertDTO.password),
             email = usuarioInsertDTO.email,
-            rol = usuarioInsertDTO.rol ?: "",
+            role = usuarioInsertDTO.role ?: "",
             address = Address(
                 street = usuarioInsertDTO.street,
                 number = usuarioInsertDTO.num,
@@ -35,7 +35,7 @@ object DTOMapper {
             email = user.email,
             password = user.password,
             passwordRepeat = user.password,
-            rol = user.rol,
+            role = user.role,
             street = user.address.street,
             num = user.address.number,
             municipio = user.address.municipio,
@@ -48,7 +48,7 @@ object DTOMapper {
         return UserDTO(
             username = usuario.username,
             email = usuario.email,
-            rol = usuario.rol
+            role = usuario.role
         )
     }
 

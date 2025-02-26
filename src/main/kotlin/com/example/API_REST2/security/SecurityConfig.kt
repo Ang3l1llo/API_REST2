@@ -9,6 +9,7 @@ import com.nimbusds.jose.proc.SecurityContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
@@ -31,18 +32,24 @@ class SecurityConfig {
     private lateinit var rsaKeys: RSAKeysProperties
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity) : SecurityFilterChain {
-
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         return http
-            .csrf { csrf -> csrf.disable() } // Cross-Site Forgery
-            .authorizeHttpRequests { auth -> auth
-                .anyRequest().permitAll()
+            .csrf { it.disable() }
+            .authorizeHttpRequests { auth ->
+                auth
+                    .requestMatchers(HttpMethod.POST, "/users/register").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/users/login").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/tasks/create").authenticated()
+                    .requestMatchers(HttpMethod.GET, "/tasks/getAll").authenticated()
+                    .requestMatchers(HttpMethod.GET, "/tasks/{id}").authenticated()
+                    .requestMatchers(HttpMethod.PUT, "/tasks/{id}").authenticated()
+                    .requestMatchers(HttpMethod.DELETE, "/tasks/{id}").authenticated()
+                    .anyRequest().authenticated()
             }
             .oauth2ResourceServer { oauth2 -> oauth2.jwt(Customizer.withDefaults()) }
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .httpBasic(Customizer.withDefaults())
             .build()
-
     }
 
     @Bean

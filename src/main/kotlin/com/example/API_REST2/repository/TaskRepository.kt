@@ -10,4 +10,6 @@ import java.util.*
 interface TaskRepository: MongoRepository<Task, String> {
 
     fun findByTitle(title: String): Optional<Task>
+    fun findByUserId(userId: String): List<Task>
+
 }

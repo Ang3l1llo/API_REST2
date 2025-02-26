@@ -2,12 +2,11 @@ package com.example.API_REST2.service
 
 import com.example.API_REST2.DTO.TaskDTO
 import com.example.API_REST2.DTO.TaskInsertDTO
-import com.example.API_REST2.exception.BadRequestException
-import com.example.API_REST2.exception.ConflictException
-import com.example.API_REST2.exception.NotFoundException
+import com.example.API_REST2.exception.*
 import com.example.API_REST2.model.Task
 import com.example.API_REST2.repository.TaskRepository
 import com.example.API_REST2.util.DTOMapper
+import com.example.API_REST2.util.SecurityUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -19,6 +18,10 @@ class TaskService {
     private lateinit var taskRepository: TaskRepository
 
     fun createTask(taskInsertDTO: TaskInsertDTO): TaskDTO {
+
+        if (!SecurityUtils.isAdmin() && taskInsertDTO.userId != SecurityUtils.getAuthenticatedUser()) {
+            throw ForbiddenException("No tienes permiso crear esta tarea")
+        }
 
         if (taskRepository.findByTitle(taskInsertDTO.title).isPresent) {
             throw ConflictException("La tarea ${taskInsertDTO.title} ya existe")
@@ -47,13 +50,20 @@ class TaskService {
 
     fun loadAllTasks(): List<TaskDTO> {
 
-        return taskRepository.findAll().map { DTOMapper.entityToTaskDTO(it) }
-
+        return if (SecurityUtils.isAdmin()) {
+            taskRepository.findAll().map { DTOMapper.entityToTaskDTO(it) }
+        } else {
+            taskRepository.findByUserId(SecurityUtils.getAuthenticatedUser()).map { DTOMapper.entityToTaskDTO(it) }
+        }
     }
 
     fun loadTaskById(id: String): TaskDTO {
 
         val task = taskRepository.findById(id).orElseThrow{NotFoundException("Tarea con ID ${id} no encontrada")}
+
+        if (!SecurityUtils.isAdmin() && task.userId != SecurityUtils.getAuthenticatedUser()) {
+            throw ForbiddenException("No tienes permiso para ver esta tarea")
+        }
 
         return DTOMapper.entityToTaskDTO(task)
 
@@ -61,28 +71,37 @@ class TaskService {
 
     fun updateTask(id: String, taskDTO: TaskInsertDTO): TaskDTO {
 
-        val existingTask = taskRepository.findById(id).orElseThrow{NotFoundException("Tarea con ID ${id} no encontrada")}
+        val task = taskRepository.findById(id).orElseThrow { NotFoundException("Tarea con ID $id no encontrada") }
 
-        val updatedTask = existingTask.copy(
+        if (!SecurityUtils.isAdmin()) {
+            if (task.userId != SecurityUtils.getAuthenticatedUser()) {
+                throw ForbiddenException("No tienes permiso para modificar esta tarea")
+            }
+        }
+
+        val updatedTask = task.copy(
             title = taskDTO.title,
             description = taskDTO.description,
             state = taskDTO.state,
-            userId = taskDTO.userId,
             completed = taskDTO.completed
         )
-
         taskRepository.save(updatedTask)
 
         return DTOMapper.entityToTaskDTO(updatedTask)
-
-
     }
 
     fun deleteTask(id: String) {
 
+        val taskToDelete = taskRepository.findById(id).orElseThrow { NotFoundException("Tarea no encontrada") }
+
         if (!taskRepository.existsById(id)) {
             throw NotFoundException("Tarea con ID ${id} no existente")
         }
+
+        if (!SecurityUtils.isAdmin() && taskToDelete.userId != SecurityUtils.getAuthenticatedUser()) {
+            throw ForbiddenException("No tienes permiso para eliminar esta tarea")
+        }
+
         taskRepository.deleteById(id)
 
     }

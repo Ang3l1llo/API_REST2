@@ -181,3 +181,67 @@ API REST2 API es una API REST segura para la gestión de tareas, que permite a l
 ![GUI-Login-Fail.png](Comprobaciones%2FGUI-Login-Fail.png)
 
 
+### Creación de Tareas
+
+![USER_CREATE_TASK.png](Comprobaciones%2FUSER_CREATE_TASK.png)
+
+![USER_CREATE_TASK_BBDD.png](Comprobaciones%2FUSER_CREATE_TASK_BBDD.png)
+
+![USER_CREATE_TASK_403.png](Comprobaciones%2FUSER_CREATE_TASK_403.png)
+
+![USER_CREATE_TASK_404.png](Comprobaciones%2FUSER_CREATE_TASK_404.png)
+
+![USER_CREATE_TASK_500.png](Comprobaciones%2FUSER_CREATE_TASK_500.png)
+
+![USER_CREATE_TASK_UNAUTH.png](Comprobaciones%2FUSER_CREATE_TASK_UNAUTH.png)
+
+![ADMIN_CREATE_TASK.png](Comprobaciones%2FADMIN_CREATE_TASK.png)
+
+![ADMIN_CREATE_TASK_BBDD.png](Comprobaciones%2FADMIN_CREATE_TASK_BBDD.png)
+
+![ADMIN_CREATE_TASK_TO_USER.png](Comprobaciones%2FADMIN_CREATE_TASK_TO_USER.png)
+
+![ADMIN_CREATE_TASK_TO_USER_BBDD.png](Comprobaciones%2FADMIN_CREATE_TASK_TO_USER_BBDD.png)
+
+![ADMIN_CREATE_400.png](Comprobaciones%2FADMIN_CREATE_400.png)
+
+![ADMIN_CREATE_TASK_409.png](Comprobaciones%2FADMIN_CREATE_TASK_409.png)
+
+
+### Lectura de Tareas
+
+![USER_GET_TASK.png](Comprobaciones%2FUSER_GET_TASK.png)
+
+![USER_GETALL.png](Comprobaciones%2FUSER_GETALL.png)
+
+![USER_GET_TASK_403.png](Comprobaciones%2FUSER_GET_TASK_403.png)
+
+![ADMIN_GET_TASK.png](Comprobaciones%2FADMIN_GET_TASK.png)
+
+![ADMIN_GETALL.png](Comprobaciones%2FADMIN_GETALL.png)
+
+
+### Modificación de Tareas
+
+![USER_PUT_TASK.png](Comprobaciones%2FUSER_PUT_TASK.png)
+
+![USER_PUT_TASK_403.png](Comprobaciones%2FUSER_PUT_TASK_403.png)
+
+![ADMIN_PUT_TASK_TO_USER.png](Comprobaciones%2FADMIN_PUT_TASK_TO_USER.png)
+
+![ADMIN_PUT_TASK_BBDD.png](Comprobaciones%2FADMIN_PUT_TASK_BBDD.png)
+
+![ADMIN_PUT_TASK_404.png](Comprobaciones%2FADMIN_PUT_TASK_404.png)
+
+
+### Eliminación de Tareas
+
+![USER_DELETE.png](Comprobaciones%2FUSER_DELETE.png)
+
+![USER_DELETE_BBDD.png](Comprobaciones%2FUSER_DELETE_BBDD.png)
+
+![USER_DELETE_403.png](Comprobaciones%2FUSER_DELETE_403.png)
+
+![ADMIN_DELETE.png](Comprobaciones%2FADMIN_DELETE.png)
+
+![ADMIN_DELETE_BBDD.png](Comprobaciones%2FADMIN_DELETE_BBDD.png)
