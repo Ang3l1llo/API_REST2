@@ -8,9 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.R
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -19,14 +16,20 @@ import io.ktor.client.statement.*
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.*
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Composable
-fun LoginScreen(onNavigateToRegister: () -> Unit) {
+fun LoginScreen(
+    onNavigateToRegister: () -> Unit,
+    onLoginSuccess: (token: String, isAdmin: Boolean, username: String) -> Unit
+) {
     var nickname by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var token by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
-    val coroutinesScope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     val client = remember { HttpClient(CIO) }
 
     Box(
@@ -39,50 +42,42 @@ fun LoginScreen(onNavigateToRegister: () -> Unit) {
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //por incorporar
-//            Image(
-//                painter = painterResource(R.drawable.logo),
-//                contentDescription = "Logo",
-//                modifier = Modifier.size(100.dp),
-//                contentScale = ContentScale.Crop
-//            )
-
             Text("Iniciar Sesión", style = MaterialTheme.typography.h5, color = Color.White)
-
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
-                value = nickname, onValueChange = { nickname = it },
+                value = nickname,
+                onValueChange = { nickname = it },
                 label = { Text("Usuario") },
                 modifier = Modifier.background(Color.White)
             )
-
             Spacer(modifier = Modifier.height(8.dp))
-            TextField(value = password, onValueChange = { password = it },
+            TextField(
+                value = password,
+                onValueChange = { password = it },
                 label = { Text("Contraseña") },
                 modifier = Modifier.background(Color.White)
             )
-
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
-                coroutinesScope.launch {
+                coroutineScope.launch {
                     val response: HttpResponse = client.post("http://localhost:8080/users/login") {
                         contentType(ContentType.Application.Json)
                         setBody("""{"username": "$nickname", "password": "$password"}""")
                     }
                     when (response.status) {
                         HttpStatusCode.Created -> {
-                            // TODO redirigir a pantalla de inicio
-                            val responseBody = response.bodyAsText()
-                            token = responseBody
-                            println("Token JSON: $responseBody") // Imprime el token por terminal
-                            errorMessage = "Inicio de sesión exitoso"
+                            val json = Json.parseToJsonElement(response.bodyAsText()).jsonObject
+                            val token = json["token"]?.jsonPrimitive?.content ?: ""
+                            val isAdmin = json["isAdmin"]?.jsonPrimitive?.booleanOrNull ?: false
+                            // Si el backend no retorna el username, usamos el nickname
+                            val username = json["username"]?.jsonPrimitive?.content ?: nickname
+                            onLoginSuccess(token, isAdmin, username)
                         }
                         HttpStatusCode.Unauthorized -> {
                             errorMessage = "Credenciales incorrectas, verifica tus datos"
                         }
                         else -> {
-                            // errorMessage = "Error desconocido: ${response.status}"
-                            errorMessage = "Comprueba tu credenciales"
+                            errorMessage = "Error: ${response.status}"
                         }
                     }
                 }
@@ -93,12 +88,6 @@ fun LoginScreen(onNavigateToRegister: () -> Unit) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(errorMessage, color = Color.Red)
             }
-
-            if (token.isNotEmpty()) {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Token: $token", color = Color.Green)
-            }
-
             Spacer(modifier = Modifier.height(8.dp))
             TextButton(onClick = onNavigateToRegister) {
                 Text("¿No tienes cuenta? Regístrate", color = Color.White)
@@ -106,3 +95,7 @@ fun LoginScreen(onNavigateToRegister: () -> Unit) {
         }
     }
 }
+
+
+
+

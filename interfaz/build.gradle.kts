@@ -35,9 +35,6 @@ dependencies {
 
 
 
-
-
-
 }
 
 compose.desktop {

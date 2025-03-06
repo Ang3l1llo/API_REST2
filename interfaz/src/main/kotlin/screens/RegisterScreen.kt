@@ -218,14 +218,12 @@ fun RegisterScreen(onNavigateToLogin: () -> Unit) {
                                         "email": "$email",
                                         "password": "$password",
                                         "passwordRepeat": "$passwordRepeat",
-                                        "rol": "USER",
-                                        "direccion": {
-                                            "provincia": "$provincia",
-                                            "municipio": "$municipio",
-                                            "street": "$street",
-                                            "num": "$num",
-                                            "cp": "$cp"
-                                        }
+                                        "role": "USER",
+                                        "provincia": "$provincia",
+                                        "municipio": "$municipio",
+                                        "street": "$street",
+                                        "num": "$num",
+                                        "cp": "$cp"
                                     }"""
                                 )
                             }

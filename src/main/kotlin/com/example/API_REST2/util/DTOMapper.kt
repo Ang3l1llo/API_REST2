@@ -52,26 +52,10 @@ object DTOMapper {
         )
     }
 
-    fun taskInsertDTOToEntity(taskInsertDTO: TaskInsertDTO): Task {
-        return Task(
-            _id = null,  // MongoDB generará automáticamente el ID
-            title = taskInsertDTO.title,
-            description = taskInsertDTO.description,
-            state = taskInsertDTO.state,
-            userId = taskInsertDTO.userId,
-            completed = taskInsertDTO.completed
-        )
-    }
 
     fun entityToTaskDTO(task: Task): TaskDTO {
         return TaskDTO(
-            title = task.title,
-            description = task.description
-        )
-    }
-
-    fun entityToTaskInsertDTO(task: Task): TaskInsertDTO {
-        return TaskInsertDTO(
+            _id = task._id,
             title = task.title,
             description = task.description,
             state = task.state,
@@ -79,4 +63,5 @@ object DTOMapper {
             completed = task.completed
         )
     }
+
 }

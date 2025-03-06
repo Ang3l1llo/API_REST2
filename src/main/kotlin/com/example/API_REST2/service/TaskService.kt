@@ -80,6 +80,7 @@ class TaskService {
         }
 
         val updatedTask = task.copy(
+            _id = task._id,
             title = taskDTO.title,
             description = taskDTO.description,
             state = taskDTO.state,
