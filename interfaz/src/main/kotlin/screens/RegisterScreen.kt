@@ -210,7 +210,7 @@ fun RegisterScreen(onNavigateToLogin: () -> Unit) {
                     }
                     else -> {
                         coroutineScope.launch {
-                            val response: HttpResponse = client.post("http://localhost:8080/users/register") {
+                            val response: HttpResponse = client.post("https://api-rest2.onrender.com/users/register") {
                                 contentType(ContentType.Application.Json)
                                 setBody(
                                     """{

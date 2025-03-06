@@ -52,7 +52,7 @@ fun UpdateTaskScreen(
 
         try {
             println("Intentando cargar tarea con ID: $taskId")
-            val response: HttpResponse = client.get("http://localhost:8080/tasks/$taskId") {
+            val response: HttpResponse = client.get("https://api-rest2.onrender.com/tasks/$taskId") {
                 headers { append(HttpHeaders.Authorization, "Bearer $token") }
             }
 
@@ -113,7 +113,7 @@ fun UpdateTaskScreen(
                         scope.launch {
                             try {
                                 println("Actualizando tarea con ID: $taskId")
-                                val requestUrl = "http://localhost:8080/tasks/$taskId"
+                                val requestUrl = "https://api-rest2.onrender.com/tasks/$taskId"
                                 println("URL de solicitud: $requestUrl")
 
                                 val requestBody = """

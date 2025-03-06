@@ -44,7 +44,7 @@ fun TaskScreen(
     LaunchedEffect(token) {
         coroutineScope.launch {
             try {
-                val response: HttpResponse = client.get("http://localhost:8080/tasks/getAll") {
+                val response: HttpResponse = client.get("https://api-rest2.onrender.com/tasks/getAll") {
                     headers { append(HttpHeaders.Authorization, "Bearer $token") }
                 }
                 if (response.status == HttpStatusCode.OK) {
@@ -114,12 +114,12 @@ fun TaskScreen(
                             IconButton(onClick = {
                                 coroutineScope.launch {
                                     try {
-                                        val deleteResponse: HttpResponse = client.delete("http://localhost:8080/tasks/$id") {
+                                        val deleteResponse: HttpResponse = client.delete("https://api-rest2.onrender.com/tasks/$id") {
                                             headers { append(HttpHeaders.Authorization, "Bearer $token") }
                                         }
                                         if (deleteResponse.status == HttpStatusCode.NoContent) {
                                             // Recargar tareas
-                                            val updatedResponse: HttpResponse = client.get("http://localhost:8080/tasks/getAll") {
+                                            val updatedResponse: HttpResponse = client.get("https://api-rest2.onrender.com/tasks/getAll") {
                                                 headers { append(HttpHeaders.Authorization, "Bearer $token") }
                                             }
                                             if (updatedResponse.status == HttpStatusCode.OK) {

@@ -60,7 +60,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 coroutineScope.launch {
-                    val response: HttpResponse = client.post("http://localhost:8080/users/login") {
+                    val response: HttpResponse = client.post("https://api-rest2.onrender.com/users/login") {
                         contentType(ContentType.Application.Json)
                         setBody("""{"username": "$nickname", "password": "$password"}""")
                     }
