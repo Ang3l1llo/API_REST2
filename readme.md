@@ -1,7 +1,7 @@
-# API REST2
+# SentriTask API
 
 ## Descripción del Proyecto
-API REST2 API es una API REST segura para la gestión de tareas, que permite a los usuarios crear, gestionar y completar tareas, con diferentes niveles de acceso según el rol del usuario.
+SentriTask es una API REST segura para la gestión de tareas, que permite a los usuarios crear, gestionar y completar tareas, con diferentes niveles de acceso según el rol del usuario.
 
 ## Documentos del Proyecto
 
